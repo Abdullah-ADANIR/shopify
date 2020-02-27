@@ -3,15 +3,14 @@
 if (window['SegmentifyTrackingObject']) {
     throw new Error("Segmentify is already loaded!");
   }
-  ​
   var segNamespace = "Segmentify";
-  ​
+
   window['SegmentifyTrackingObject'] = segNamespace;
-  ​
+
   window[segNamespace] = window[segNamespace] || function () {
     (window[segNamespace].q = window[segNamespace].q || []).push(arguments);
   };
-  ​
+
   function waitSegmentifyJquery() {
     if (window["jQuery"]) {
       /* config details : http://cdn.segmentify.com/segmentify.debug.js */
@@ -35,12 +34,12 @@ if (window['SegmentifyTrackingObject']) {
       setTimeout(waitSegmentifyJquery, 100);
     }
   }
-  ​
+
   function waitSegmentifyAndjQuery() {
     try {
       if (window["_SgmntfY_"] && window["_SgmntfY_"]._getJq()) {
         window.segJquery = window["_SgmntfY_"]._getJq();
-  ​
+  
         segJquery(document).ready(function () {
           SegmentifyIntegration(window.segJquery).init();
           /* search additional script */
@@ -54,7 +53,7 @@ if (window['SegmentifyTrackingObject']) {
       segmentifyEvents.error(err);
     }
   }
-  ​
+  
   var SegmentifyIntegration = function (jQuery) {
     var segmentifyEvents = {
       viewPage: function (category, subCategory, params) {
@@ -116,7 +115,7 @@ if (window['SegmentifyTrackingObject']) {
         });
       }
     };
-  ​
+  
     var helperFunctions = {
       "setCookie": function (cname, cvalue, exdays) {
         window["_SgmntfY_"]._storePersistentData(cname, cvalue, exdays, false);
@@ -130,54 +129,54 @@ if (window['SegmentifyTrackingObject']) {
       "priceFormatter": function (price, separators, currency_symbol) {
         try {
           var temp = (price || "").toString();
-  ​
+  
           if (temp) {
             // remove all unwanted characters if it is not a number
             var allowedChars = "0123456789.,";
-  ​
+  
             for (var i = 0; i < price.length; i++) {
               if (allowedChars.indexOf(price[i]) < 0) {
                 temp = temp.replace(price[i], "");
               }
             }
-  ​
+  
             // remove redundant decimal separators
             var occurences = temp.match(/\./g);
-  ​
+  
             if (occurences && Array.isArray(occurences) && occurences.length > 1) {
               for (var i = 0; i < occurences.length - 1; i++) {
                 temp = temp.replace(".", "");
               }
             }
-  ​
+  
             // if separators provided, replace them
             if (separators && Array.isArray(separators) && separators.length === 2) {
               var regexPattern = "";
               var regex = null;
-  ​
+  
               if (separators[1]) {
                 regexPattern = "\\" + separators[1];
                 regex = new RegExp(regexPattern, "g");
-  ​
+  
                 temp = temp.replace(regex, "");
               }
-  ​
+  
               if (separators[0]) {
                 regexPattern = "\\" + separators[0];
                 regex = new RegExp(regexPattern, "g");
-  ​
+  
                 temp = temp.replace(regex, separators[1]);
               }
             }
-  ​
+  
             // if currency symbol is valid and has a string value, replace it
             if (currency_symbol && typeof currency_symbol === "string") {
               temp = temp.replace(currency_symbol, "");
             }
-  ​
+  
             // cast the price to float
             temp = parseFloat(temp.toString().trim().replace(/\s/g, "")).toFixed(2);
-  ​
+  
             return temp;
           }
           // if given parameters are not valid, return zero
@@ -196,10 +195,10 @@ if (window['SegmentifyTrackingObject']) {
             !Array.isArray(arr)) {
             return null;
           }
-  ​
+  
           for (var i = 0; i < arr.length; i++) {
             var arr_item = arr[i];
-  ​
+  
             // if this array object contains property -prop-, so this is what we are looking for
             if (arr_item.hasOwnProperty(prop)) {
               return arr_item;
@@ -237,13 +236,13 @@ if (window['SegmentifyTrackingObject']) {
         }
       }
     };
-  ​     var pageType = ShopifyAnalytics.meta.page.pageType;
+       var pageType = ShopifyAnalytics.meta.page.pageType;
     var pageVariables = {
       category: "",
       subCategory: "",
       params: {}
     };
-  ​
+  
     var findPageType = function () {
       try {
         /* Home Page, Category Page, Product Page, Basket Page, Search Page, Checkout Success Page */
@@ -251,64 +250,64 @@ if (window['SegmentifyTrackingObject']) {
           pageVariables.category = "Home Page";
           return;
         }
-  ​
+  
         if (pageType=="collection") {
           pageVariables.category = "Category Page";
           pageVariables.subCategory = "";
           return;
         }
-  ​
+  
         if (pageType=="product") {
           pageVariables.category = "Product Page";
           return;
         }
-  ​
+  
         if (window.location.pathname=="/cart") {
           pageVariables.category = "Basket Page";
           return;
         }
-  ​
+  
         if (pageType=="searchresults") {
           pageVariables.category = "Search Page";
           pageVariables.subCategory = "";
           return;
         }
-  ​
+  
         if (jQuery("body:contains(404)").length > 0)  {
           pageVariables.category = "404 Page";
           return;
         }
-  ​
+  
         if (0) {
           pageVariables.category = "Checkout Success Page";
           return;
         }
-  ​
+  
         pageVariables.category = "Unknown Page";
       } catch (err) {
         // can you check it on our log system.
         segmentifyEvents.error(err);
       }
     };
-  ​
+  
     var triggerPageFunction = function (category) {
       try {
         if (category && pageFunctions.hasOwnProperty(category)) {
           pageFunctions[category]();
         }
-  ​
+  
         pageFunctions["All Pages"]();
       } catch (err) {
         // can you check it on our log system.
         segmentifyEvents.error(err);
       }
     };
-  ​
+  
     var init = function () {
       findPageType();
       triggerPageFunction(pageVariables.category);
     };
-  ​
+  
     var pageFunctions = {
       "All Pages": function () {
         try {
@@ -324,7 +323,7 @@ if (window['SegmentifyTrackingObject']) {
       "Product Page": function () {
         try {
           var productObj = {};
-  ​
+  
           productObj["brand"] = jQuery(".site-header__logo-link > font > font").text();
           productObj["title"] = jQuery(".product-single__title").text();
           productObj["productId"] =ShopifyAnalytics.meta.selectedVariantId
@@ -336,11 +335,11 @@ if (window['SegmentifyTrackingObject']) {
           productObj["category"] = "";
           productObj["categories"] =  "";
           productObj["params"] = {};
-  ​
+  
           if (parseFloat(productObj["price"]) > parseFloat(productObj["oldPrice"]) || parseFloat(productObj["oldPrice"]) === 0 || (parseFloat(productObj["oldPrice"]) === parseFloat(productObj["price"]))) {
             delete productObj["oldPrice"];
           }
-  ​
+  
           // Send product view event
           // Best practices : https://www.segmentify.com/dev/integration_web/#product-view
           segmentifyEvents.viewProduct(productObj);
@@ -355,7 +354,7 @@ if (window['SegmentifyTrackingObject']) {
         try {
           var basketAmount = helperFunctions.priceFormatter(jQuery(".cart-subtotal__price").text(),["."," "]);
           var basketProducts = [];
-  ​        var basketRows = jQuery("tr.cart__row");
+          var basketRows = jQuery("tr.cart__row");
         basketRows.each(function(index){
             basketProducts.push({
                 "quantity": jQuery(this).attr('data-cart-item-quantity'),
@@ -368,7 +367,7 @@ if (window['SegmentifyTrackingObject']) {
             "totalPrice": basketAmount,
             "productList": basketProducts
           };
-  ​
+  
           // Send checkout basket event
           // Best practices : https://www.segmentify.com/dev/integration_web/#view-basket
           segmentifyEvents.checkoutBasket(basketInfo);
@@ -382,14 +381,14 @@ if (window['SegmentifyTrackingObject']) {
           var purchaseAmount = "";
           var purchaseProducts = [];
           var orderNo = "";
-  ​
+  
           // Put purchase event information into a variable.
           var purchaseInfo = {
             "orderNo": orderNo,
             "totalPrice": purchaseAmount,
             "productList": purchaseProducts
           };
-  ​
+  
           // Send checkout purchase event
           // Best practices : https://www.segmentify.com/dev/integration_web/#view-basket
           segmentifyEvents.checkoutPurchase(purchaseInfo);
@@ -397,16 +396,16 @@ if (window['SegmentifyTrackingObject']) {
           // can you check it on our log system.
           segmentifyEvents.error(err);
         }
-  ​
+  
       }
     };
-  ​
+  
     return {
       init: init,
       events: segmentifyEvents,
       helpers: helperFunctions
     };
   };
-  ​
+  
   /* Call Wait Function at the bottom of the script */
   waitSegmentifyJquery()
