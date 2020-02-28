@@ -3,6 +3,7 @@
 if (window['SegmentifyTrackingObject']) {
     throw new Error("Segmentify is already loaded!");
   }
+  //asdasdasd
   var segNamespace = "Segmentify";
 
   window['SegmentifyTrackingObject'] = segNamespace;
