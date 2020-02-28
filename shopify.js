@@ -3,7 +3,7 @@
 if (window['SegmentifyTrackingObject']) {
     throw new Error("Segmentify is already loaded!");
   }
-  //asdasdasd
+  //yorum satırı
   var segNamespace = "Segmentify";
 
   window['SegmentifyTrackingObject'] = segNamespace;
