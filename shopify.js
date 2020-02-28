@@ -76,6 +76,7 @@ if (window['SegmentifyTrackingObject']) {
         /* console.log("Checkout Purchase event is going", purchaseObj); */
         Segmentify('checkout:purchase', purchaseObj);
       },
+      //depğifgıhtfıjııj
       basketAdd: function (basketObj) {
         /* console.log("Basket Add Event is going", basketObj); */
         Segmentify('basket:add', basketObj);
