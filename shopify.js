@@ -326,11 +326,11 @@ if (window['SegmentifyTrackingObject']) {
         try {
           var productObj = {};
   
-          productObj["brand"] = jQuery(".site-header__logo-link > font > font").text();
+          productObj["brand"] = jQuery(".site-header__logo-link").text();
           productObj["title"] = jQuery(".product-single__title").text();
-          productObj["productId"] =ShopifyAnalytics.meta.selectedVariantId
-          productObj["image"] = jQuery(".zoomImg").attr("src");
-          productObj["price"] = jQuery(".price-item.price-item--regular").text().trim();
+          productObj["productId"] =ShopifyAnalytics.meta.selectedVariantId;
+          productObj["image"] = jQuery("meta[property='og:image']").attr("content");
+          productObj["price"] = jQuery(".price-item.price-item--regular").text().trim().split(" ")[0];
           productObj["oldPrice"] = "";
           productObj["inStock"] = true;
           productObj["url"] =  window.location.href;
