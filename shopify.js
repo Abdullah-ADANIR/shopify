@@ -334,8 +334,8 @@ if (window['SegmentifyTrackingObject']) {
           productObj["oldPrice"] = "";
           productObj["inStock"] = true;
           productObj["url"] =  window.location.href;
-          productObj["category"] = "";
-          productObj["categories"] =  "";
+          productObj["category"] = "All";
+          productObj["categories"] =  ["All"];
           productObj["params"] = {};
   
           if (parseFloat(productObj["price"]) > parseFloat(productObj["oldPrice"]) || parseFloat(productObj["oldPrice"]) === 0 || (parseFloat(productObj["oldPrice"]) === parseFloat(productObj["price"]))) {
