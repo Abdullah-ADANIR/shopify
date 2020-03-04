@@ -3,7 +3,7 @@
 if (window['SegmentifyTrackingObject']) {
   throw new Error("Segmentify is already loaded!");
 }
-//yorum satırı
+//yorum satırısdafdgsg
 var segNamespace = "Segmentify";
 
 window['SegmentifyTrackingObject'] = segNamespace;
@@ -331,7 +331,7 @@ var SegmentifyIntegration = function (jQuery) {
         productObj["title"] = jQuery(".product-single__title").text().trim();
         productObj["productId"] = ShopifyAnalytics.meta.selectedVariantId;
         productObj["image"] = jQuery("meta[property='og:image']").attr("content");
-        productObj["price"] = jQuery(".price-item.price-item--regular").text().trim().split(" ")[0];
+        productObj["price"] = jQuery(".price-item.price-item--regular").text().trim().split("T")[0].resplace(",",".");
         productObj["oldPrice"] = "";
         productObj["inStock"] = true;
         productObj["url"] = window.location.href;
