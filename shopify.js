@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /* CUSTOMER_NAME */
 /* Do not load Segmentify more than one to prevent potential error occurrence */
 if (window['SegmentifyTrackingObject']) {
@@ -329,7 +328,7 @@ if (window['SegmentifyTrackingObject']) {
   
           productObj["brand"] = jQuery(".site-header__logo-link > font > font").text();
           productObj["title"] = jQuery(".product-single__title").text();
-          productObj["productId"] =ShopifyAnalytics.meta.selectedVariantId
+          productObj["productId"] =ShopifyAnalytics.meta.selectedVariantId;
           productObj["image"] = jQuery(".zoomImg").attr("src");
           productObj["price"] = jQuery(".price-item.price-item--regular").text().trim();
           productObj["oldPrice"] = "";
