@@ -329,7 +329,7 @@ var SegmentifyIntegration = function (jQuery) {
 
         productObj["brand"] = jQuery(".h2.site-header__logo").text().trim();
         productObj["title"] = jQuery(".product-single__title").text().trim();
-        productObj["productId"] = ShopifyAnalytics.meta.selectedVariantId;
+        productObj["productId"] = ShopifyAnalytics.meta.product.id;       
         productObj["image"] = jQuery("meta[property='og:image']").attr("content");
         productObj["price"] = jQuery(".price-item.price-item--regular").text().trim().split("T")[0].replace(",",".");
         productObj["oldPrice"] = "";
