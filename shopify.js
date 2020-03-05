@@ -331,7 +331,7 @@ var SegmentifyIntegration = function (jQuery) {
         productObj["title"] = jQuery(".product-single__title").text().trim();
         productObj["productId"] = ShopifyAnalytics.meta.product.id;       
         productObj["image"] = jQuery("meta[property='og:image']").attr("content");
-        productObj["price"] = jQuery(".price-item.price-item--regular").text().trim().split("T")[0].replace(",",".");
+        productObj["price"] = jjQuery(".price-item.price-item--regular").text().trim().split(".0")[0].replace(",",".");
         productObj["oldPrice"] = "";
         productObj["inStock"] = true;
         productObj["url"] = window.location.href;
